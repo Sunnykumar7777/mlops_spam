@@ -196,7 +196,6 @@ def main(input_filepath, output_filepath):
     le = LabelEncoder()
     df['v1'] = le.fit_transform(df['v1'])
 
-    # Saving the processed data 
     df.to_csv(output_filepath, index=False)
     logger.info(f'Processed data saved to {output_filepath}')
 
@@ -205,16 +204,7 @@ if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=log_fmt)
 
-    # not used in this stub but often useful for finding various files
     project_dir = Path(__file__).resolve().parents[2]
 
-    # find .env automagically by walking up directories until it's found, then
-    # load up the .env entries as environment variables
     load_dotenv(find_dotenv())
-    # input_filepath = r'D:\spam_detection\spam_detection\data\raw\spam_1.csv'
-    # output_filepath = r'D:\spam_detection\spam_detection\data\processed\cleaned_spam_data.csv'
-
-    # input_filepath = r'..\..\data\raw\spam_1.csv'
-    # output_filepath = r'..\..\data\processed\cleaned_spam_data.csv'
-
     main()

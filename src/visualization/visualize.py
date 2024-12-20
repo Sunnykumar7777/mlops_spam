@@ -98,13 +98,3 @@ if __name__ == '__main__':
    load_dotenv(find_dotenv())
 
    main()
-
-
-# if __name__ == '__main__':
-#     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-#     logging.basicConfig(level=logging.INFO, format=log_fmt)
-    
-#     data_filepath = r'D:\spam_detection\spam_detection\data\raw\spam.csv'
-#     figures_dir = r'D:\spam_detection\spam_detection\reports\figures'
-    
-#     main(data_filepath, figures_dir)
