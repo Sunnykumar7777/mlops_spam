@@ -170,9 +170,9 @@ def preprocessing(df, col):
 
 #++++++++++++++++++++++++++++++ Pre-Processing [END] ++++++++++++++++++++++++++++++#
 
-# @click.command()
-# @click.argument('input_filepath', type=click.Path(exists=True))
-# @click.argument('output_filepath', type=click.Path())
+@click.command()
+@click.argument('input_filepath', type=click.Path(exists=True))
+@click.argument('output_filepath', type=click.Path())
 def main(input_filepath, output_filepath):
     """ Runs data processing scripts to turn raw data from (../raw) into
         cleaned data ready to be analyzed (saved in ../processed).
@@ -210,11 +210,11 @@ if __name__ == '__main__':
 
     # find .env automagically by walking up directories until it's found, then
     # load up the .env entries as environment variables
-    # load_dotenv(find_dotenv())
-    input_filepath = r'D:\spam_detection\spam_detection\data\raw\spam_1.csv'
-    output_filepath = r'D:\spam_detection\spam_detection\data\processed\cleaned_spam_data.csv'
+    load_dotenv(find_dotenv())
+    # input_filepath = r'D:\spam_detection\spam_detection\data\raw\spam_1.csv'
+    # output_filepath = r'D:\spam_detection\spam_detection\data\processed\cleaned_spam_data.csv'
 
     # input_filepath = r'..\..\data\raw\spam_1.csv'
     # output_filepath = r'..\..\data\processed\cleaned_spam_data.csv'
 
-    main(input_filepath, output_filepath)
+    main()

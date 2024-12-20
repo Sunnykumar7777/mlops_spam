@@ -7,13 +7,3 @@ model:
   random_forest:
     n_estimators: 100
     random_state: 42
-
-
-paths:
-  features_filepath: 'data/interim/spam_features.csv'
-  model_filepath: 'models/random_forest_spam.joblib'
-  metrics_filepath: 'reports/metrics.json'
-
-logging:
-  level: 'INFO'
-  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'

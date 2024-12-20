@@ -4,48 +4,106 @@ from pathlib import Path
 import joblib
 import click
 from dotenv import find_dotenv, load_dotenv
+import yaml
 
 
-def load_model(model_filepath):
+# def load_model(model_filepath):
+#     logger = logging.getLogger(__name__)
+#     logger.info(f'Loading model from {model_filepath}')
+#     return joblib.load(model_filepath)
+
+# def load_vectorizer(vectorizer_filepath):
+#     logger = logging.getLogger(__name__)
+#     logger.info(f'Loading vectorizer from {vectorizer_filepath}')
+#     return joblib.load(vectorizer_filepath)
+
+# def predict_spam(text, model, vectorizer):
+#     text_features = vectorizer.transform([text])
+    
+#     prediction = model.predict(text_features)
+#     probability = model.predict_proba(text_features)
+    
+#     return prediction[0], probability[0]
+
+# def main(model_filepath, vectorizer_filepath):
+#     logger = logging.getLogger(__name__)
+    
+#     model = load_model(model_filepath)
+#     vectorizer = load_vectorizer(vectorizer_filepath)
+
+#     example_texts = [
+#         "URGENT! You have won a prize of £1000",
+#         "Hi, when are you coming home for dinner?",
+#     ]
+    
+#     for text in example_texts:
+#         prediction, probability = predict_spam(text, model, vectorizer)
+#         logger.info(f'\nText: {text}')
+#         logger.info(f'Prediction: {"Spam" if prediction == 1 else "Not Spam"}')
+#         logger.info(f'Probability: Spam: {probability[1]:.2f}, Not Spam: {probability[0]:.2f}')
+
+# if __name__ == '__main__':
+#     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+#     logging.basicConfig(level=logging.INFO, format=log_fmt)
+    
+#     model_filepath = 'models/random_forest_spam.joblib'
+#     vectorizer_filepath = 'data/interim/tfidf_vectorizer.joblib'
+    
+#     main(model_filepath, vectorizer_filepath)
+
+
+def load_params(params_path):
+    with open(params_path, 'r') as f:
+        params = yaml.safe_load(f)
+    return params
+
+def load_model(model_path):
+    return joblib.load(model_path)
+
+def make_predictions(model, X_test):
+    return model.predict(X_test)
+
+def evaluate_predictions(y_true, y_pred):
+    accuracy = (y_true == y_pred).mean()
+    return accuracy
+
+@click.command()
+@click.argument('model_path', type=click.Path(exists=True))
+@click.argument('test_data_path', type=click.Path(exists=True))
+@click.argument('output_filepath', type=click.Path())
+def main(model_path, test_data_path, output_filepath):
     logger = logging.getLogger(__name__)
-    logger.info(f'Loading model from {model_filepath}')
-    return joblib.load(model_filepath)
-
-def load_vectorizer(vectorizer_filepath):
-    logger = logging.getLogger(__name__)
-    logger.info(f'Loading vectorizer from {vectorizer_filepath}')
-    return joblib.load(vectorizer_filepath)
-
-def predict_spam(text, model, vectorizer):
-    text_features = vectorizer.transform([text])
     
-    prediction = model.predict(text_features)
-    probability = model.predict_proba(text_features)
+    params_path = Path(__file__).resolve().parents[2] / 'params.yaml'
+    params = load_params(params_path)
     
-    return prediction[0], probability[0]
-
-def main(model_filepath, vectorizer_filepath):
-    logger = logging.getLogger(__name__)
+    logger.info(f'Loading test data from {test_data_path}')
+    test_df = pd.read_csv(test_data_path)
     
-    model = load_model(model_filepath)
-    vectorizer = load_vectorizer(vectorizer_filepath)
-
-    example_texts = [
-        "URGENT! You have won a prize of £1000",
-        "Hi, when are you coming home for dinner?",
-    ]
+    target_column = params['data']['target_column']
+    X_test = test_df.drop([target_column], axis=1)
+    y_test = test_df[target_column]
     
-    for text in example_texts:
-        prediction, probability = predict_spam(text, model, vectorizer)
-        logger.info(f'\nText: {text}')
-        logger.info(f'Prediction: {"Spam" if prediction == 1 else "Not Spam"}')
-        logger.info(f'Probability: Spam: {probability[1]:.2f}, Not Spam: {probability[0]:.2f}')
+    logger.info(f'Loading model from {model_path}')
+    model = load_model(model_path)
+    
+    logger.info('Making predictions')
+    predictions = make_predictions(model, X_test)
+    
+    accuracy = evaluate_predictions(y_test, predictions)
+    logger.info(f'Model accuracy on test set: {accuracy:.4f}')
+    
+    logger.info(f'Saving accuracy score to {output_filepath}')
+    Path(output_filepath).parent.mkdir(parents=True, exist_ok=True)
+    
+    with open(output_filepath, 'w') as f:
+        f.write(f'Model Accuracy: {accuracy:.4f}')
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=log_fmt)
-    
-    model_filepath = 'models/random_forest_spam.joblib'
-    vectorizer_filepath = 'data/interim/tfidf_vectorizer.joblib'
-    
-    main(model_filepath, vectorizer_filepath)
+
+    project_dir = Path(__file__).resolve().parents[2]
+    load_dotenv(find_dotenv())
+
+    main()

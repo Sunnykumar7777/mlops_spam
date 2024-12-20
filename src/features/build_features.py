@@ -43,9 +43,9 @@ def create_tfidf_features(df, text_column='v2', max_features=4000):
     return final_df, vectorizer
 
 
-# @click.command()
-# @click.argument('input_filepath', type=click.Path(exists=True))
-# @click.argument('output_filepath', type=click.Path())
+@click.command()
+@click.argument('input_filepath', type=click.Path(exists=True))
+@click.argument('output_filepath', type=click.Path())
 def build_features(input_filepath, output_filepath):
     """Build features from processed data."""
     logger = logging.getLogger(__name__)
@@ -75,11 +75,11 @@ if __name__ == '__main__':
 
     # find .env automagically by walking up directories until it's found, then
     # load up the .env entries as environment variables
-    # load_dotenv(find_dotenv())
-    input_filepath = r'D:\spam_detection\spam_detection\data\processed\cleaned_spam_data.csv'
-    output_filepath = r'D:\spam_detection\spam_detection\data\interim\spam_features.csv'
+    load_dotenv(find_dotenv())
+    # input_filepath = r'D:\spam_detection\spam_detection\data\processed\cleaned_spam_data.csv'
+    # output_filepath = r'D:\spam_detection\spam_detection\data\interim\spam_features.csv'
 
     # input_filepath = r'..\..\data\processed\cleaned_spam_data.csv'
     # output_filepath = r'..\..\data\interim\spam_features.csv'
 
-    build_features(input_filepath, output_filepath)
+    build_features()
