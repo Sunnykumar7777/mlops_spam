@@ -10,6 +10,8 @@ stages: # Different stages for dvc pipline
   train_model: # Script to split train-test dataset and training the model.
     cmd: python src\models\train_model.py .\data\interim\spam_features.csv .\models\random_forest_spam.joblib
       .\models\gradient_boosting_spam.joblib
+    params:
+    - make_dataset.test_size
 
   predict_model: # Script to predict the model accuracy for test dataset
     cmd: python src\models\predict_model.py .\models\random_forest_spam.joblib .\data\interim\test_data.csv

@@ -8,15 +8,15 @@ stages:
   train_model:
     cmd: python src\models\train_model.py .\data\interim\spam_features.csv .\models\random_forest_spam.joblib
       .\models\gradient_boosting_spam.joblib
+  predict_model:
+    cmd: python src\models\predict_model.py .\models\random_forest_spam.joblib .\data\interim\test_data.csv
+      .\models\predictions.txt
   visualize:
     cmd: python src\visualization\visualize.py .\data\processed\cleaned_spam_data.csv
       .\reports\figures
     outs:
     - path: dvclive
       hash: md5
-      md5: ce4f12f2f6a1d7c9106d002754d89761.dir
-      size: 2217
-      nfiles: 6
-  predict_model:
-    cmd: python src\models\predict_model.py .\models\random_forest_spam.joblib .\data\interim\test_data.csv
-      .\models\predictions.txt
+      md5: 3200f9c265de08fcab1be3f4ead0b210.dir
+      size: 1127
+      nfiles: 5
