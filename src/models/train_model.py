@@ -89,13 +89,13 @@ def main(input_filepath, output_filepath, output_filepath2):
     logger.info(f'Saving test data to {test_data_path}')
     test_data.to_csv(test_data_path, index=False)
     
-    # model = train_model_rf(
-    #     X_train, 
-    #     y_train, 
-    #     n_estimators=params['model']['random_forest']['n_estimators'],
-    #     random_state=params['model']['random_forest']['random_state'],
-    #     max_depth=params['model']['random_forest']['max_depth']
-    # )
+    model = train_model_rf(
+        X_train, 
+        y_train, 
+        n_estimators=params['model']['random_forest']['n_estimators'],
+        random_state=params['model']['random_forest']['random_state'],
+        max_depth=params['model']['random_forest']['max_depth']
+    )
 
     model_2 = train_model_gb(
         X_train,
@@ -109,9 +109,9 @@ def main(input_filepath, output_filepath, output_filepath2):
     accuracy = evaluate_model(model_2, X_test, y_test)
     
     # Save the model
-    # logger.info(f'Saving model to {output_filepath}')
-    # Path(output_filepath).parent.mkdir(parents=True, exist_ok=True)
-    # joblib.dump(model, output_filepath)
+    logger.info(f'Saving model to {output_filepath}')
+    Path(output_filepath).parent.mkdir(parents=True, exist_ok=True)
+    joblib.dump(model, output_filepath)
 
     logger.info(f'Saving model to {output_filepath2}')
     Path(output_filepath2).parent.mkdir(parents=True, exist_ok=True)

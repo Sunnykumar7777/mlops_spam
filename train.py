@@ -8,7 +8,7 @@ def read_accuracy(file_path=r'.\models\predictions.txt'):
     try:
         with open(file_path, 'r') as f:
             content = f.read()
-            match = re.search(r'Model Accuracy: (\d+\.\d+)', content)
+            match = re.search(r'Model Accuracy RF: (\d+\.\d+)', content)
             if match:
                 return float(match.group(1))
             else:
@@ -25,6 +25,4 @@ with Live(save_dvc_exp=True) as live:
     for epoch in range(epochs):
         live.log_metric("train/accuracy", accuracy)
         live.log_metric("train/loss", epochs - epoch - random.random())
-        live.log_metric("val/accuracy",epoch + random.random() )
-        live.log_metric("val/loss", epochs - epoch - random.random())
         live.next_step()

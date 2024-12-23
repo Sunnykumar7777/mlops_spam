@@ -14,9 +14,9 @@ stages:
     outs:
     - path: dvclive
       hash: md5
-      md5: 9bb34f094f8a6c03fd49a21ae6f8ebd3.dir
-      size: 1931
-      nfiles: 6
+      md5: 26cca5da3a5dd96daa13f1381cd6dae4.dir
+      size: 844
+      nfiles: 4
   predict_model:
     cmd: python src\models\predict_model.py .\models\random_forest_spam.joblib .\data\interim\test_data.csv
       .\models\predictions.txt

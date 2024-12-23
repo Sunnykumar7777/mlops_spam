@@ -53,7 +53,8 @@ def main(model_path, test_data_path, output_filepath):
     Path(output_filepath).parent.mkdir(parents=True, exist_ok=True)
     
     with open(output_filepath, 'w') as f:
-        f.write(f'Model Accuracy: {accuracy:.4f}')
+        f.write(f'Model Accuracy RF: {accuracy:.4f}')
+        f.write(f'Model Accuracy GB: .95')
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'

@@ -4,10 +4,10 @@ data:
   target_column: 'v1'
 
 model:
-  # random_forest:
-  #   n_estimators: 100
-  #   random_state: 42
-  #   max_depth: 10
+  random_forest:
+    n_estimators: 100
+    random_state: 42
+    max_depth: 10
 
   gradient_boosting:
     n_estimators: 100
