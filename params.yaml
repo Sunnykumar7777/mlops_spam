@@ -1,15 +1,15 @@
-data:
+data: # Configuration: dataset spliting for train and test 
   test_size: 0.2
   random_state: 42
   target_column: 'v1'
 
-model:
-  random_forest:
+model: # Model training configuration
+  random_forest: # Random Forest
     n_estimators: 100
     random_state: 42
     max_depth: 10
 
-  gradient_boosting:
+  gradient_boosting: # Gradient Boosting 
     n_estimators: 100
     random_state: 42
     max_depth: 10
