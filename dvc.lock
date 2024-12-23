@@ -1,0 +1,19 @@
+schema: '2.0'
+stages:
+  make_dataset:
+    cmd: python src\data\make_dataset.py .\data\raw\spam_1.csv .\data\processed\cleaned_spam_data.cs
+  build_features:
+    cmd: python src\features\build_features.py .\data\processed\cleaned_spam_data.csv
+      .\data\interim\spam_features.csv
+  train_model:
+    cmd: python src\models\train_model.py .\data\interim\spam_features.csv .\models\random_forest_spam.joblib
+      .\models\gradient_boosting_spam.joblib
+  visualize:
+    cmd: python src\visualization\visualize.py .\data\processed\cleaned_spam_data.csv
+      .\reports\figures
+    outs:
+    - path: dvclive
+      hash: md5
+      md5: 353da9fe0e41af36ba80b6d0f870e53f.dir
+      size: 2230
+      nfiles: 6

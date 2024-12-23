@@ -7,3 +7,12 @@ model:
   random_forest:
     n_estimators: 100
     random_state: 42
+    max_depth: 10
+
+  gradient_boosting:
+    n_estimators: 100
+    random_state: 42
+    max_depth: 10
+
+train:
+  epochs: 22

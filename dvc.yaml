@@ -1,0 +1,39 @@
+# stages:
+#   - make_dataset:
+#     - cmd: python src\data\make_dataset.py \data\raw\spam_1.csv \data\processed\cleaned_spam_data.cs
+
+#   - build_features:
+#     - cmd: python src\features\build_features.py \data\processed\cleaned_spam_data.csv \data\interim\spam_features.csv
+
+#   - train_model:
+#     -cmd: python src\models\train_model.py \data\interim\spam_features.csv \models\random_forest_spam.joblib
+
+#   - visualize:
+#     - cmd: python src\visualization\visualize.py \data\processed\cleaned_spam_data.csv \reports\figures
+
+
+stages:
+  make_dataset:
+    cmd: python src\data\make_dataset.py .\data\raw\spam_1.csv .\data\processed\cleaned_spam_data.cs
+
+  build_features:
+    cmd: python src\features\build_features.py .\data\processed\cleaned_spam_data.csv
+      .\data\interim\spam_features.csv
+
+  train_model:
+    cmd: python src\models\train_model.py .\data\interim\spam_features.csv .\models\random_forest_spam.joblib
+      .\models\gradient_boosting_spam.joblib
+
+  visualize:
+    cmd: python src\visualization\visualize.py .\data\processed\cleaned_spam_data.csv
+      .\reports\figures
+    outs:
+    - dvclive
+
+params:
+- dvclive/params.yaml
+metrics:
+- dvclive/metrics.json
+plots:
+- dvclive/plots/metrics:
+    x: step
