@@ -24,6 +24,10 @@ stages:
     cmd: python src\models\train_model.py .\data\interim\spam_features.csv .\models\random_forest_spam.joblib
       .\models\gradient_boosting_spam.joblib
 
+  predict_model:
+    cmd: python src\models\predict_model.py .\models\random_forest_spam.joblib .\data\interim\test_data.csv
+      .\models\predictions.txt
+
   visualize:
     cmd: python src\visualization\visualize.py .\data\processed\cleaned_spam_data.csv
       .\reports\figures
