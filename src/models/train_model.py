@@ -106,7 +106,7 @@ def main(input_filepath, output_filepath, output_filepath2):
     )
     
     # Evaluate model
-    # accuracy = evaluate_model(model, X_test, y_test)
+    accuracy = evaluate_model(model_2, X_test, y_test)
     
     # Save the model
     # logger.info(f'Saving model to {output_filepath}')
