@@ -9,6 +9,8 @@ import click
 import re
 from collections import Counter
 from dotenv import find_dotenv, load_dotenv
+import dvclive
+
 
 
 def load_params(params_path):

@@ -27,9 +27,9 @@ def accurracy_score(file_path=r'.\models\predictions.txt'):
         print(f"Error reading accuracies: {str(e)}")
 
 
-mlflow.set_tracking_uri("http://localhost:5000")
+# mlflow.set_tracking_uri("http://localhost:5000")
 
-mlflow.set_experiment("spam_classification")
+# mlflow.set_experiment("spam_classification")
 
 
 # with Live(save_dvc_exp=True) as live:
