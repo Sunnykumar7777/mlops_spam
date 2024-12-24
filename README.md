@@ -1,4 +1,4 @@
-spam_detection
+Spam Detection
 ==============================
 
 # ML Ops
@@ -19,7 +19,7 @@ This project implements an end-to-end machine learning pipeline with MLOps best 
 3. pip install -r requirements.txt
 
 4. Clone this repository using cookiecutter:
-   cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
+   - cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
 
 
 ## Extension for VS-Code
