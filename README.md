@@ -32,6 +32,17 @@ dvc init
 dvc exp run
 ```
 
+## DVC commands
+```
+dvc init # to initialize dvc repo
+dvc add models # add models folder
+dvc status # to check status
+dvc remote add -d myremote cloud # include cloud experiments
+dvc commit # commit the changes
+dvc push # push the changes
+```
+
+
 Project Organization
 ------------
 
