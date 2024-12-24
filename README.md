@@ -22,26 +22,42 @@ This project implements an end-to-end machine learning pipeline with MLOps best 
 - DVC (Data Version Control) 
 - Git 
 
-## Initialize dvc 
-```
-dvc init
-```
+## How to connect DVC UI
+1. First install dvc extension from vscode Extensions.
+2. Initialize DVC
+    ```
+    dvc init
+    ```
+3. Add Models directory
+    ```
+    dvc add models
+    ```
+4. Include Cloud directory for experiments
+    ```
+    dvc remote add -d myremote cloud
+    ```
+5. Commit the changes
+    ```
+    dvc commit
+    ```
+6. Push the changes
+    ```
+    dvc push
+    ```
 
 ## Running the pipeline
 ```
 dvc exp run
 ```
 
-## DVC commands
+## Add Gitignore Configuration
 ```
-dvc init # to initialize dvc repo
-dvc add models # add models folder
-dvc status # to check status
-dvc remote add -d myremote cloud # include cloud experiments
-dvc commit # commit the changes
-dvc push # push the changes
+/data
+/models
+/cloud
+/dvclive
+*.joblib
 ```
-
 
 Project Organization
 ------------
