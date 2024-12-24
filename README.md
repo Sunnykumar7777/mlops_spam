@@ -22,7 +22,7 @@ This project implements an end-to-end machine learning pipeline with MLOps best 
 - DVC (Data Version Control) 
 - Git 
 
-## How to connect DVC UI
+## How to connect DVC
 1. First install dvc extension from vscode Extensions.
 2. Initialize DVC
     ```
@@ -50,12 +50,30 @@ This project implements an end-to-end machine learning pipeline with MLOps best 
 dvc exp run
 ```
 
-## Add Gitignore Configuration
+## How to connect ML-Flow
+1. Install ML-flow(2.19.0 or higher) using pip:
+    ```
+    pip install mlflow
+    ```
+2. Then run mlflow_train.py using command:
+    ```
+    mlflow server --host 0.0.0.0 --port 5000
+    ```
+3. Then also run mlflow_train.py in new terminal:
+    ```
+    python mlflow_train.py
+    ```
+4. Check all records running on:
+   - http://localhost:5000
+
+
+## Add .gitignore Configuration
 ```
 /data
 /models
 /cloud
 /dvclive
+/mlruns
 *.joblib
 ```
 
