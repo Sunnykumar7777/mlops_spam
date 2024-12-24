@@ -1,7 +1,4 @@
-Spam Detection
-==============================
-
-# ML Ops
+# ML Ops (Spam Detection)
 
 This project implements an end-to-end machine learning pipeline with MLOps best practices, including data versioning (DVC), model training, model tracking, and deployment.
 
@@ -16,9 +13,7 @@ This project implements an end-to-end machine learning pipeline with MLOps best 
 
 2. conda install cookiecutter
 
-3. pip install -r requirements.txt
-
-4. Clone this repository using cookiecutter:
+3. Clone this repository using cookiecutter:
    - cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
 
 
