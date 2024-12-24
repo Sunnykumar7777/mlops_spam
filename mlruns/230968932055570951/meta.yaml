@@ -1,0 +1,6 @@
+artifact_location: mlflow-artifacts:/230968932055570951
+creation_time: 1735017624741
+experiment_id: '230968932055570951'
+last_update_time: 1735017624741
+lifecycle_stage: active
+name: spam_calssification

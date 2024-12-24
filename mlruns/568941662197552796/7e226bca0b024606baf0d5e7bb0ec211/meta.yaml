@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/568941662197552796/7e226bca0b024606baf0d5e7bb0ec211/artifacts
+end_time: 1735017169279
+entry_point_name: ''
+experiment_id: '568941662197552796'
+lifecycle_stage: active
+run_id: 7e226bca0b024606baf0d5e7bb0ec211
+run_name: delicate-lynx-238
+run_uuid: 7e226bca0b024606baf0d5e7bb0ec211
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1735017164132
+status: 3
+tags: []
+user_id: lenovo

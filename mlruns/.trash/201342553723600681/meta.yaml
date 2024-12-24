@@ -1,0 +1,7 @@
+artifact_location: mlflow-artifacts:/201342553723600681
+creation_time: 1734962887599
+experiment_id: '201342553723600681'
+last_update_time: 1734962892975
+lifecycle_stage: deleted
+name: spam_classification_run
+tags: {}
