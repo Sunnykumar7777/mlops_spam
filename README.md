@@ -44,6 +44,8 @@ This project implements an end-to-end machine learning pipeline with MLOps best 
     ```
     dvc push
     ```
+7. Also view DVC experiments on VS code by clicking on DVC > Show Experiments
+
 
 ## Running the pipeline
 ```
@@ -65,8 +67,6 @@ dvc exp run
     ```
 4. Check all records running on:
    - http://localhost:5000
-
-5. Also view DVC experiments on VS code by clicking on DVC > Show Experiments
 
 
 ## Add .gitignore Configuration
