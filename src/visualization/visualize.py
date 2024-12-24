@@ -1,3 +1,9 @@
+"""
+This module creates visualizations for spam classification data analysis:
+- Data balance between spam and non-spam classes
+- Top frequent words in spam and non-spam messages
+"""
+
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import numpy as np
@@ -14,11 +20,13 @@ import dvclive
 
 
 def load_params(params_path):
+   """Load parameters from YAML config file."""
    with open(params_path, 'r') as f:
        params = yaml.safe_load(f)
    return params
 
 def plot_data_balance(df, output_path, target_column):
+   """Create bar plot showing distribution of spam vs non-spam messages."""
    value_counts = df[target_column].value_counts()
    
    plt.figure(figsize=(6, 4))
@@ -35,10 +43,12 @@ def plot_data_balance(df, output_path, target_column):
    plt.savefig(str(output_path / 'data_balance.png'))
    plt.close()
 
+# Common stop words to filter out from analysis
 stop_words = set(['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 
                 'for', 'of', 'with', 'by','is', 'i', 'how', 'it'])
 
 def top_words(df, column, top_n=10, label=None):
+   """Find most frequent words in text data, excluding stop words."""
    if label is not None:
        df = df[df['v1'] == label]
    
@@ -51,6 +61,15 @@ def top_words(df, column, top_n=10, label=None):
    return top_words
 
 def plot_top_words(df, output_path, label, title):
+   """
+   Create bar plot of most frequent words.
+   
+   Args:
+       df (pd.DataFrame): Input dataframe with text data
+       output_path (Path): Directory to save plot
+       label (int): Label value to analyze (0 for non-spam, 1 for spam)
+       title (str): Plot title
+   """
    top_words_data = top_words(df, 'v2', top_n=20, label=label)
    
    plt.figure(figsize=(8, 6))
@@ -74,6 +93,18 @@ def plot_top_words(df, output_path, label, title):
 @click.argument('input_filepath', type=click.Path(exists=True))
 @click.argument('output_filepath', type=click.Path())
 def main(input_filepath, output_filepath):
+   """
+   Main function to generate visualizations.
+   
+   Args:
+       input_filepath (str): Path to input data CSV
+       output_filepath (str): Directory to save visualization plots
+       
+   The function:
+   1. Loads data and parameters
+   2. Creates plot of class distribution
+   3. Creates plots of top words for spam and non-spam messages
+   """
    logger = logging.getLogger(__name__)
    
    params_path = Path(__file__).resolve().parents[2] / 'params.yaml'

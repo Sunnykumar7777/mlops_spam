@@ -1,4 +1,7 @@
-# -*- coding: utf-8 -*-
+"""
+This module pre processed data from row dataset for spam classification.
+"""
+
 import click
 import logging
 from pathlib import Path

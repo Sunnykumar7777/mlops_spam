@@ -1,3 +1,9 @@
+"""
+This module implements model training and evaluation for spam classification.
+It loads features, trains Random Forest and Gradient Boosting classifiers, 
+and evaluates their performance on test data.
+"""
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
@@ -11,17 +17,32 @@ import json
 
 
 def load_params(params_path):
+    """Load model parameters from YAML config file."""
     with open(params_path, 'r') as f:
         params = yaml.safe_load(f)
     return params
 
 def load_features(features_filepath):
+    """Load feature matrix from CSV file."""
     logger = logging.getLogger(__name__)
     logger.info('Loading features')
     return pd.read_csv(features_filepath)
 
 
 def train_model_rf(X_train, y_train, n_estimators, random_state, max_depth):
+    """
+    Train Random Forest classifier.
+    
+    Args:
+        X_train (pd.DataFrame): Training features
+        y_train (pd.Series): Training labels
+        n_estimators (int): Number of trees in forest
+        random_state (int): Random seed for reproducibility
+        max_depth (int): Maximum depth of trees
+        
+    Returns:
+        RandomForestClassifier: Trained Random Forest model
+    """
     logger = logging.getLogger(__name__)
     logger.info('Training Random Forest model')
     
@@ -36,6 +57,19 @@ def train_model_rf(X_train, y_train, n_estimators, random_state, max_depth):
 
 
 def train_model_gb(X_train, y_train, n_estimators, random_state, max_depth):
+    """
+    Train Gradient Boosting classifier.
+    
+    Args:
+        X_train (pd.DataFrame): Training features
+        y_train (pd.Series): Training labels
+        n_estimators (int): Number of boosting stages
+        random_state (int): Random seed for reproducibility
+        max_depth (int): Maximum depth of trees
+        
+    Returns:
+        GradientBoostingClassifier: Trained Gradient Boosting model
+    """
     logger = logging.getLogger(__name__)
     logger.info('Training GradientBoosting model')
     
@@ -50,6 +84,7 @@ def train_model_gb(X_train, y_train, n_estimators, random_state, max_depth):
 
 
 def evaluate_model(model, X_test, y_test):
+    """Evaluate model performance on test data."""
     logger = logging.getLogger(__name__)
     logger.info('Evaluating model')
     
@@ -66,6 +101,21 @@ def evaluate_model(model, X_test, y_test):
 @click.argument('output_filepath', type=click.Path())
 @click.argument('output_filepath2', type=click.Path())
 def main(input_filepath, output_filepath, output_filepath2):
+    """
+    Main function to train and evaluate models.
+    
+    Args:
+        input_filepath (str): Path to input features file
+        output_filepath (str): Path to save Random Forest model
+        output_filepath2 (str): Path to save Gradient Boosting model
+        
+    The function:
+    1. Loads model parameters and feature data
+    2. Splits data into train/test sets
+    3. Trains Random Forest and optionally Gradient Boosting models
+    4. Evaluates model performance
+    5. Saves trained models
+    """
     logger = logging.getLogger(__name__)
     
     params_path = Path(__file__).resolve().parents[2] / 'params.yaml'

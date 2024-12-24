@@ -1,3 +1,8 @@
+"""
+This module handles model evaluation by loading a trained model,
+making predictions on test data, and calculating accuracy scores.
+"""
+
 import pandas as pd
 import logging
 from pathlib import Path
@@ -9,17 +14,21 @@ import yaml
 
 
 def load_params(params_path):
+    """Load model parameters from YAML config file."""
     with open(params_path, 'r') as f:
         params = yaml.safe_load(f)
     return params
 
 def load_model(model_path):
+    """Load trained model from disk."""
     return joblib.load(model_path)
 
 def make_predictions(model, X_test):
+    """Generate predictions using trained model."""
     return model.predict(X_test)
 
 def evaluate_predictions(y_true, y_pred):
+    """Calculate accuracy score for predictions."""
     accuracy = (y_true == y_pred).mean()
     return accuracy
 
@@ -28,6 +37,20 @@ def evaluate_predictions(y_true, y_pred):
 @click.argument('test_data_path', type=click.Path(exists=True))
 @click.argument('output_filepath', type=click.Path())
 def main(model_path, test_data_path, output_filepath):
+    """
+    Main function to evaluate model performance.
+    
+    Args:
+        model_path (str): Path to saved model file
+        test_data_path (str): Path to test data CSV
+        output_filepath (str): Path to save accuracy results
+        
+    The function:
+    1. Loads model parameters and test data
+    2. Loads trained model
+    3. Makes predictions on test data
+    4. Calculates and saves accuracy score
+    """
     logger = logging.getLogger(__name__)
     
     params_path = Path(__file__).resolve().parents[2] / 'params.yaml'

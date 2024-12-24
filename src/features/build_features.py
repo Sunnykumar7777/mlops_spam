@@ -1,3 +1,8 @@
+"""
+This module builds text features from processed data for spam classification.
+It creates TF-IDF features and word count features from the input text data.
+"""
+
 import click
 import pandas as pd
 from nltk.tokenize import word_tokenize
@@ -11,9 +16,23 @@ from joblib import dump
 # nltk.download('punkt')
 
 def count_total_words(text):
+    """Count the total number of words in a text string using NLTK word tokenization."""
     return len(word_tokenize(text))
 
 def create_tfidf_features(df, text_column='v2', max_features=4000):
+    """
+    Create TF-IDF and word count features from text data.
+    
+    Args:
+        df (pd.DataFrame): Input dataframe containing text data
+        text_column (str): Name of column containing text data. Defaults to 'v2'
+        max_features (int): Maximum number of TF-IDF features to create. Defaults to 4000
+        
+    Returns:
+        tuple: (final_df, vectorizer) where:
+            - final_df (pd.DataFrame): DataFrame containing TF-IDF features, word counts, and labels
+            - vectorizer (TfidfVectorizer): Fitted TF-IDF vectorizer object
+   """
     logger = logging.getLogger(__name__)
     logger.info('Creating word count feature')
 
@@ -46,7 +65,18 @@ def create_tfidf_features(df, text_column='v2', max_features=4000):
 @click.argument('input_filepath', type=click.Path(exists=True))
 @click.argument('output_filepath', type=click.Path())
 def build_features(input_filepath, output_filepath):
-    """Build features from processed data."""
+    """
+    Build features from processed data.
+    
+    Args:
+        input_filepath (str): Path to input CSV file containing processed text data
+        output_filepath (str): Path where output feature matrix will be saved
+        
+    The function:
+    1. Loads processed text data
+    2. Creates TF-IDF and word count features
+    3. Saves feature matrix and TF-IDF vectorizer
+    """
     logger = logging.getLogger(__name__)
     
     logger.info('Loading processed data')
