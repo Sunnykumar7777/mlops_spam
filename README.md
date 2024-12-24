@@ -1,7 +1,41 @@
 spam_detection
 ==============================
 
-A short description of the project.
+# ML Ops
+
+This project implements an end-to-end machine learning pipeline with MLOps best practices, including data versioning (DVC), model training, model tracking, and deployment.
+
+## Prerequisites
+
+- Conda (24.11.1 or higher)
+- Python (3.12.3 or higher)
+
+## Installation
+
+1. First, install Anaconda from [Anaconda's official website](https://www.anaconda.com/download)
+
+2. conda install cookiecutter
+
+3. pip install -r requirements.txt
+
+4. Clone this repository using cookiecutter:
+   cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
+
+
+## Extension for VS-Code
+
+- DVC (Data Version Control) 
+- Git 
+
+## Initialize dvc 
+```
+dvc init
+```
+
+## Running the pipeline
+```
+dvc exp run
+```
 
 Project Organization
 ------------
@@ -49,9 +83,20 @@ Project Organization
     │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
     │       └── visualize.py
     │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+    |── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+    |
+    |── train.py           <- Script to check dvc experiments
+    |
+    |── mlflow_train.py    <- Script to check mlflow experiments
+    |
+    |── nltk_install.py    <- Script to install nltk required modules for text preprocessing
+    |
+    |── params.yaml        <- to store model configuration
+    |
+    └── dvc.yaml           <- to create and store model process pipeline 
 
 
 --------
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+   
