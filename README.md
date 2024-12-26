@@ -14,13 +14,40 @@ This project implements an end-to-end machine learning pipeline with MLOps best 
 2. conda install cookiecutter
 
 3. Clone this repository using cookiecutter:
-   - cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
+    ```
+    cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
+    ```
+   - It creates the structure for ML-model project.
 
 
 ## Extension for VS-Code
 
-- DVC (Data Version Control) 
 - Git 
+- DVC (Data Version Control) 
+
+## Create the Git repo (to track files and changes)
+1. Initialize git repo (Using terminal)
+    ```
+    git init
+    ```
+2. Add a remote repository to local Git
+    ```
+    git remote add origin <URL>
+    ```
+3. Add changes
+    ```
+    git add .
+    ```
+4. Commit changes
+    ```
+    git commit -m "Initial commit"
+    ```
+5. Push changes
+    ```
+    git push origin master
+    ```
+Alternative:
+- Install git extension on VS-code and perform same action using Git UI.
 
 ## How to connect DVC
 1. First install dvc extension from vscode Extensions.
@@ -28,26 +55,31 @@ This project implements an end-to-end machine learning pipeline with MLOps best 
     ```
     dvc init
     ```
-3. Add Models directory
+3. Add data directory (it creates a data.dvc to track data)
+    ```
+    dvc add data
+    ```
+4. Add Models directory
     ```
     dvc add models
     ```
-4. Include Cloud directory for experiments
+5. Managing Data Versions: Add Cloud directory (to upload data to remote storage)
     ```
     dvc remote add -d myremote cloud
     ```
-5. Commit the changes
-    ```
+6. Commit the changes
+    ``` 
     dvc commit
     ```
-6. Push the changes
+7. Push the changes
     ```
     dvc push
     ```
-7. Also view DVC experiments on VS code by clicking on DVC > Show Experiments
+8. Also view DVC experiments on VS code by clicking on DVC > Show Experiments
 
 
 ## Running the pipeline
+First create stages on dvc.yaml then run the command:
 ```
 dvc exp run
 ```
@@ -134,6 +166,8 @@ Project Organization
     |── nltk_install.py    <- Script to install nltk required modules for text preprocessing
     |
     |── params.yaml        <- to store model configuration
+    |
+    |── data.dvc           <- to track and manage data versions.
     |
     └── dvc.yaml           <- to create and store model process pipeline 
 
